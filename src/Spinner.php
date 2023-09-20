@@ -60,6 +60,10 @@ class Spinner extends Prompt
 
             $pid = pcntl_fork();
 
+            register_shutdown_function(
+                fn () => $pid ? posix_kill($pid, SIGHUP) : null,
+            );
+
             if ($pid === 0) {
                 while (true) { // @phpstan-ignore-line
                     $this->render();
