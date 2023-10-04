@@ -165,6 +165,17 @@ function table(array|Collection $headers = [], array|Collection $rows = null): v
 }
 
 /**
+ * Display a table.
+ *
+ * @param  array<int, string|array<int, string>>|Collection<int, string|array<int, string>>  $headers
+ * @param  array<int, array<int, string>>|Collection<int, array<int, string>>  $rows
+ */
+function datatable(array|Collection $headers = [], array|Collection $rows = null): array
+{
+    return (new DataTable($headers, $rows))->prompt();
+}
+
+/**
  * Display a progress bar.
  *
  * @template TSteps of iterable<mixed>|int
