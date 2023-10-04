@@ -41,7 +41,7 @@ class DataTableRenderer extends Renderer
         $rows = $table->visible();
 
         $rows[$table->index] = collect($rows[$table->index])->map(fn ($cell) => new TableCell($cell, [
-            'style' => $selectedStyle
+            'style' => $selectedStyle,
         ]))->all();
 
         (new SymfonyTable($buffered))
@@ -51,9 +51,9 @@ class DataTableRenderer extends Renderer
             ->render();
 
         collect(explode(PHP_EOL, trim($buffered->content(), PHP_EOL)))
-            ->each(fn ($line) => $this->line(' ' . $line));
+            ->each(fn ($line) => $this->line(' '.$line));
 
-        $this->line('  ' . $this->dim('Page ') . $table->page . $this->dim(' of ') . $table->totalPages);
+        $this->line('  '.$this->dim('Page ').$table->page.$this->dim(' of ').$table->totalPages);
         $this->newLine();
 
         if ($table->state === 'search') {
@@ -61,7 +61,7 @@ class DataTableRenderer extends Renderer
                 ['Enter', $this->dim('Select')],
                 ['Ctrl+D', $this->dim('Clear Search')],
             ];
-        } else if ($table->state === 'jump') {
+        } elseif ($table->state === 'jump') {
             $hints = [
                 ['Enter', $this->dim('Jump to Page')],
             ];
@@ -78,10 +78,10 @@ class DataTableRenderer extends Renderer
         }
 
         $hints = collect($hints)
-            ->map(fn ($line) => $line[0] . ' ' . $line[1])
+            ->map(fn ($line) => $line[0].' '.$line[1])
             ->join('    ');
 
-        $this->line('  ' . $hints);
+        $this->line('  '.$hints);
 
         return $this;
     }
@@ -93,11 +93,12 @@ class DataTableRenderer extends Renderer
         }
 
         if ($table->state !== 'search' && $table->query !== '') {
-            $this->line('  ' . $this->dim('Search: ') . $table->query);
+            $this->line('  '.$this->dim('Search: ').$table->query);
+
             return;
         }
 
-        $this->line('  Search: ' . $table->valueWithCursor(60));
+        $this->line('  Search: '.$table->valueWithCursor(60));
     }
 
     protected function renderJump(DataTable $table)
@@ -106,6 +107,6 @@ class DataTableRenderer extends Renderer
             return;
         }
 
-        $this->line('  Jump to Page: ' . $table->jumpValueWithCursor(60));
+        $this->line('  Jump to Page: '.$table->jumpValueWithCursor(60));
     }
 }

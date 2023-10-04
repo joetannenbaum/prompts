@@ -71,7 +71,7 @@ trait Themes
             return static::$theme;
         }
 
-        if (!isset(static::$themes[$name])) {
+        if (! isset(static::$themes[$name])) {
             throw new InvalidArgumentException("Prompt theme [{$name}] not found.");
         }
 
