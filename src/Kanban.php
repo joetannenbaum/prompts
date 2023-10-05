@@ -15,7 +15,7 @@ class Kanban extends Prompt
             [
                 'title' => 'Eat Pizza',
                 'description' => '(Whole pie).',
-            ]
+            ],
         ],
         [
             [
