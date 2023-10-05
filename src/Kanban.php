@@ -45,6 +45,12 @@ class Kanban extends Prompt
 
     public string $deleteAction = 'confirm';
 
+    public bool $modalAnimating = false;
+
+    public bool $modalFirstRound = true;
+
+    public int $modalFrames = 0;
+
     /**
      * Create a new Table instance.
      *
@@ -90,6 +96,8 @@ class Kanban extends Prompt
                     match ($key) {
                         'q' => $this->quit(),
                         'n' => $this->addNewItem(),
+                        'd' => $this->pendingDeleteAnimated(),
+                        'e' => $this->pendingDeleteAnimatedEasing(),
                         default => null,
                     };
                 }
@@ -127,6 +135,39 @@ class Kanban extends Prompt
 
         $this->listenForHotkeys();
         $this->prompt();
+    }
+
+    protected function pendingDeleteAnimated()
+    {
+        $this->deleteAction = 'confirm';
+        $this->state = 'pendingDelete';
+        $this->modalAnimating = true;
+        $this->modalFirstRound = true;
+
+        while ($this->modalAnimating) {
+            $this->render();
+            usleep(25_000);
+        }
+
+        $this->modalFrames = 0;
+
+        $this->pendingDelete();
+    }
+
+    protected function pendingDeleteAnimatedEasing()
+    {
+        $this->deleteAction = 'confirm';
+        $this->state = 'pendingDelete';
+        $this->modalAnimating = true;
+
+        while ($this->modalAnimating) {
+            $this->render();
+            usleep(($this->modalFrames / 10) * 100_000);
+        }
+
+        $this->modalFrames = 0;
+
+        $this->pendingDelete();
     }
 
     protected function pendingDelete()
