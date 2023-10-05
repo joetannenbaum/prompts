@@ -2,9 +2,9 @@
 
 use function Laravel\Prompts\datatable;
 
-require __DIR__ . '/../vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
-$data = file_get_contents(__DIR__ . '/datatable.json');
+$data = file_get_contents(__DIR__.'/datatable.json');
 
 $value = datatable(
     ['name' => 'Name', 'email' => 'Email', 'address' => 'Address'],
