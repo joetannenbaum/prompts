@@ -83,7 +83,7 @@ abstract class Prompt
 
             static::$interactive ??= stream_isatty(STDIN);
 
-            if (! static::$interactive) {
+            if (!static::$interactive) {
                 return $this->default();
             }
 
@@ -241,7 +241,7 @@ abstract class Prompt
     /**
      * Reset the cursor position to the beginning of the previous frame.
      */
-    private function resetCursorPosition(): void
+    protected function resetCursorPosition(): void
     {
         $lines = count(explode(PHP_EOL, $this->prevFrame)) - 1;
 
@@ -264,7 +264,7 @@ abstract class Prompt
         $diff = [];
 
         for ($i = 0; $i < max(count($aLines), count($bLines)); $i++) {
-            if (! isset($aLines[$i]) || ! isset($bLines[$i]) || $aLines[$i] !== $bLines[$i]) {
+            if (!isset($aLines[$i]) || !isset($bLines[$i]) || $aLines[$i] !== $bLines[$i]) {
                 $diff[] = $i;
             }
         }
@@ -314,13 +314,13 @@ abstract class Prompt
             return;
         }
 
-        if (! isset($this->validate)) {
+        if (!isset($this->validate)) {
             return;
         }
 
         $error = ($this->validate)($value);
 
-        if (! is_string($error) && ! is_null($error)) {
+        if (!is_string($error) && !is_null($error)) {
             throw new \RuntimeException('The validator must return a string or null.');
         }
 

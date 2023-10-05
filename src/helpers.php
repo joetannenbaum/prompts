@@ -176,6 +176,17 @@ function datatable(array|Collection $headers = [], array|Collection $rows = null
 }
 
 /**
+ * Display a table.
+ *
+ * @param  array<int, string|array<int, string>>|Collection<int, string|array<int, string>>  $headers
+ * @param  array<int, array<int, string>>|Collection<int, array<int, string>>  $rows
+ */
+function kanban(): bool
+{
+    return (new Kanban())->prompt();
+}
+
+/**
  * Display a progress bar.
  *
  * @template TSteps of iterable<mixed>|int
