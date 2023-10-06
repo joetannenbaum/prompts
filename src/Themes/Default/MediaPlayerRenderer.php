@@ -2,14 +2,11 @@
 
 namespace Laravel\Prompts\Themes\Default;
 
-use Laravel\Prompts\DataTable;
 use Laravel\Prompts\MediaPlayer;
 use Laravel\Prompts\Output\BufferedConsoleOutput;
 use Laravel\Prompts\Themes\Default\Concerns\DrawsBoxes;
 use Laravel\Prompts\Themes\Default\Concerns\DrawsScrollbars;
 use Symfony\Component\Console\Helper\Table as SymfonyTable;
-use Symfony\Component\Console\Helper\TableCell;
-use Symfony\Component\Console\Helper\TableCellStyle;
 use Symfony\Component\Console\Helper\TableStyle;
 
 class MediaPlayerRenderer extends Renderer
@@ -20,6 +17,13 @@ class MediaPlayerRenderer extends Renderer
     protected int $searchWidth = 60;
 
     protected array $frames = ['⠂', '⠒', '⠐', '⠰', '⠠', '⠤', '⠄', '⠆'];
+    protected array $playerFrame = [
+        "▄▁▆",
+        "▃▄▆",
+        "▅█▇",
+        "▃▇▅",
+        "▄▂▅",
+    ];
 
     /**
      * Render the table.
@@ -32,7 +36,7 @@ class MediaPlayerRenderer extends Renderer
         $col1Width = (int) floor($tableWidth * .25);
         $col2Width = $tableWidth - $col1Width;
         $xMargin = (int) floor(($width - $tableWidth) / 2) - 5;
-        $yMargin = 5;
+        $yMargin = 8;
         $tableHeight = $height - ($yMargin * 2);
 
         $this->searchWidth = $col1Width - strlen('Search: ');
@@ -110,6 +114,19 @@ class MediaPlayerRenderer extends Renderer
             ],
         ];
 
+        if ($player->currentTrackIndex ?? false) {
+            if ($player->playing) {
+                $frame = $this->playerFrame[$player->spinnerCount % count($this->playerFrame)];
+                $playingLabel = " {$this->cyan($frame)} {$this->cyan($player->results[$player->currentTrackIndex]['title'])} - {$player->results[$player->currentTrackIndex]['artist']}";
+            } else {
+                $playingLabel = $this->dim("     {$player->results[$player->currentTrackIndex]['title']} - {$player->results[$player->currentTrackIndex]['artist']}");
+            }
+
+            $this->minWidth = $tableWidth + 3;
+            $mediaPlayer = $this->box('', $playingLabel)->output;
+            $this->output = '';
+        }
+
         (new SymfonyTable($buffered))
             ->setRows($rows)
             ->setStyle($tableStyle)
@@ -118,36 +135,35 @@ class MediaPlayerRenderer extends Renderer
         $this->newLine($yMargin);
         collect(explode(PHP_EOL, trim($buffered->content(), PHP_EOL)))
             ->each(fn ($line) => $this->line(str_repeat(' ', $xMargin) . $line));
-        $this->newLine($yMargin);
 
-        // $this->newLine();
+        if ($player->state === 'reading') {
+            $hints = [
+                ['↑ ↓', $this->dim('Scroll')],
+                ['←', $this->dim('Back to List')],
+                ['p', $this->dim($player->playing ? 'Pause' : 'Play')],
+            ];
+        } elseif ($player->state === 'results') {
+            $hints = [
+                ['Enter', $this->dim('Show Lyrics')],
+            ];
+        }
 
-        // if ($table->state === 'search') {
-        //     $hints = [
-        //         ['Enter', $this->dim('Select')],
-        //         ['Ctrl+D', $this->dim('Clear Search')],
-        //     ];
-        // } elseif ($table->state === 'jump') {
-        //     $hints = [
-        //         ['Enter', $this->dim('Jump to Page')],
-        //     ];
-        // } else {
-        //     $hints = [
-        //         ['↑ ↓', $this->dim('Navigate Records')],
-        //         [$table->page === 1 ? $this->dim('←') : '←', $this->dim('Previous Page')],
-        //         [$table->page === $table->totalPages ? $this->dim('→') : '→', $this->dim('Next Page')],
-        //         ['Enter', $this->dim('Select')],
-        //         ['q', $this->dim('Cancel')],
-        //         ['/', $this->dim('Search')],
-        //         ['j', $this->dim('Jump to Page')],
-        //     ];
-        // }
+        $hints = str_repeat(' ', $xMargin + 1) . collect($hints ?? [['', '']])
+            ->map(fn ($line) => $line[0] . ' ' . $line[1])
+            ->join('    ');
 
-        // $hints = collect($hints)
-        //     ->map(fn ($line) => $line[0] . ' ' . $line[1])
-        //     ->join('    ');
+        if (($mediaPlayer ?? null) !== null) {
+            $mediaPlayerLines = collect(explode(PHP_EOL, $mediaPlayer));
 
-        // $this->line('  ' . $hints);
+            $mediaPlayerLines->each(
+                fn ($line) => $this->line(str_repeat(' ', $xMargin - 1) . $line)
+            );
+            $this->line($hints);
+            $this->newLine();
+        } else {
+            $this->line($hints);
+            $this->newLine($yMargin - 1);
+        }
 
         return $this;
     }
