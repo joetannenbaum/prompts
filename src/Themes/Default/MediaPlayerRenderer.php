@@ -2,20 +2,17 @@
 
 namespace Laravel\Prompts\Themes\Default;
 
-use Laravel\Prompts\DataTable;
 use Laravel\Prompts\MediaPlayer;
 use Laravel\Prompts\Output\BufferedConsoleOutput;
 use Laravel\Prompts\Themes\Default\Concerns\DrawsBoxes;
 use Laravel\Prompts\Themes\Default\Concerns\DrawsScrollbars;
 use Symfony\Component\Console\Helper\Table as SymfonyTable;
-use Symfony\Component\Console\Helper\TableCell;
-use Symfony\Component\Console\Helper\TableCellStyle;
 use Symfony\Component\Console\Helper\TableStyle;
 
 class MediaPlayerRenderer extends Renderer
 {
-    use DrawsScrollbars;
     use DrawsBoxes;
+    use DrawsScrollbars;
 
     protected int $searchWidth = 60;
 
@@ -46,7 +43,7 @@ class MediaPlayerRenderer extends Renderer
 
         $buffered = new BufferedConsoleOutput();
 
-        if ($player->lyrics !== '') {;
+        if ($player->lyrics !== '') {
             $lyricLines = $this->scrollbar(
                 collect($player->visibleLyrics($tableHeight))->map(function ($line) use ($player) {
                     if ($player->state === 'reading') {
@@ -93,19 +90,19 @@ class MediaPlayerRenderer extends Renderer
             $col1Content[] = '';
         }
 
-        $col2Content = $lyricLines->count() ? $lyricLines->join(PHP_EOL) : str_repeat(str_repeat(' ', $col2Width) . PHP_EOL, $tableHeight - 1);
+        $col2Content = $lyricLines->count() ? $lyricLines->join(PHP_EOL) : str_repeat(str_repeat(' ', $col2Width).PHP_EOL, $tableHeight - 1);
 
         if ($player->state === 'loadingLyrics') {
             $frame = $this->frames[$player->spinnerCount % count($this->frames)];
-            $col2Content = " {$this->cyan($frame)} Loading Lyrics..." . PHP_EOL;
-            $col2Content .= str_repeat(str_repeat(' ', $col2Width) . PHP_EOL, $tableHeight - 2);
+            $col2Content = " {$this->cyan($frame)} Loading Lyrics...".PHP_EOL;
+            $col2Content .= str_repeat(str_repeat(' ', $col2Width).PHP_EOL, $tableHeight - 2);
         }
 
         $col1ContentHeight = count($col1Content);
 
         $rows = [
             [
-                implode(PHP_EOL, $col1Content) . PHP_EOL . str_repeat(str_repeat(' ', $col1Width) . PHP_EOL, $tableHeight - $col1ContentHeight - 1),
+                implode(PHP_EOL, $col1Content).PHP_EOL.str_repeat(str_repeat(' ', $col1Width).PHP_EOL, $tableHeight - $col1ContentHeight - 1),
                 $col2Content,
             ],
         ];
@@ -117,7 +114,7 @@ class MediaPlayerRenderer extends Renderer
 
         $this->newLine($yMargin);
         collect(explode(PHP_EOL, trim($buffered->content(), PHP_EOL)))
-            ->each(fn ($line) => $this->line(str_repeat(' ', $xMargin) . $line));
+            ->each(fn ($line) => $this->line(str_repeat(' ', $xMargin).$line));
         $this->newLine($yMargin);
 
         // $this->newLine();
@@ -155,9 +152,9 @@ class MediaPlayerRenderer extends Renderer
     protected function renderSearch(MediaPlayer $player)
     {
         if ($player->state === 'search') {
-            return $this->cyan('Search: ') . $player->valueWithCursor($this->searchWidth);
+            return $this->cyan('Search: ').$player->valueWithCursor($this->searchWidth);
         }
 
-        return $this->dim('Search: ') . $this->truncate($player->query, $this->searchWidth);
+        return $this->dim('Search: ').$this->truncate($player->query, $this->searchWidth);
     }
 }

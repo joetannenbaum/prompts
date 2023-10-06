@@ -2,8 +2,6 @@
 
 namespace Laravel\Prompts;
 
-use Illuminate\Support\Collection;
-
 class MediaPlayer extends Prompt
 {
     use Concerns\TypedValue;
@@ -44,7 +42,7 @@ class MediaPlayer extends Prompt
                     Key::RIGHT, Key::RIGHT_ARROW, Key::CTRL_F => $this->cursorPosition = min(mb_strlen($this->query), $this->cursorPosition + 1),
                     Key::HOME, Key::CTRL_A => $this->cursorPosition = 0,
                     Key::END, Key::CTRL_E => $this->cursorPosition = mb_strlen($this->query),
-                    Key::DELETE => $this->query = mb_substr($this->query, 0, $this->cursorPosition) . mb_substr($this->query, $this->cursorPosition + 1),
+                    Key::DELETE => $this->query = mb_substr($this->query, 0, $this->cursorPosition).mb_substr($this->query, $this->cursorPosition + 1),
                     default => null,
                 };
 
@@ -63,10 +61,10 @@ class MediaPlayer extends Prompt
                         return;
                     }
 
-                    $this->query = mb_substr($this->query, 0, $this->cursorPosition - 1) . mb_substr($this->query, $this->cursorPosition);
+                    $this->query = mb_substr($this->query, 0, $this->cursorPosition - 1).mb_substr($this->query, $this->cursorPosition);
                     $this->cursorPosition--;
                 } elseif (ord($key) >= 32) {
-                    $this->query = mb_substr($this->query, 0, $this->cursorPosition) . $key . mb_substr($this->query, $this->cursorPosition);
+                    $this->query = mb_substr($this->query, 0, $this->cursorPosition).$key.mb_substr($this->query, $this->cursorPosition);
                     $this->cursorPosition++;
                 }
             }
@@ -153,7 +151,7 @@ class MediaPlayer extends Prompt
             $i++;
         }
 
-        $this->lyrics = explode(PHP_EOL, file_get_contents(__DIR__ . '/../lyrics/' . $result['key'] . '.txt'));
+        $this->lyrics = explode(PHP_EOL, file_get_contents(__DIR__.'/../lyrics/'.$result['key'].'.txt'));
 
         $this->lyricsIndex = 0;
 
