@@ -20,7 +20,8 @@
         "ext-mbstring": "*",
         "illuminate/collections": "^10.0|^11.0",
         "symfony/console": "^6.2",
-        "nunomaduro/termwind": "^1.15"
+        "nunomaduro/termwind": "^1.15",
+        "guzzlehttp/guzzle": "^7.8"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.10",

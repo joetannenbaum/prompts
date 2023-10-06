@@ -6,6 +6,7 @@ use InvalidArgumentException;
 use Laravel\Prompts\ConfirmPrompt;
 use Laravel\Prompts\DataTable;
 use Laravel\Prompts\Kanban;
+use Laravel\Prompts\MediaPlayer;
 use Laravel\Prompts\MultiSearchPrompt;
 use Laravel\Prompts\MultiSelectPrompt;
 use Laravel\Prompts\Note;
@@ -20,6 +21,7 @@ use Laravel\Prompts\TextPrompt;
 use Laravel\Prompts\Themes\Default\ConfirmPromptRenderer;
 use Laravel\Prompts\Themes\Default\DataTableRenderer;
 use Laravel\Prompts\Themes\Default\KanbanRenderer;
+use Laravel\Prompts\Themes\Default\MediaPlayerRenderer;
 use Laravel\Prompts\Themes\Default\MultiSearchPromptRenderer;
 use Laravel\Prompts\Themes\Default\MultiSelectPromptRenderer;
 use Laravel\Prompts\Themes\Default\NoteRenderer;
@@ -60,6 +62,7 @@ trait Themes
             Progress::class => ProgressRenderer::class,
             DataTable::class => DataTableRenderer::class,
             Kanban::class => KanbanRenderer::class,
+            MediaPlayer::class => MediaPlayerRenderer::class,
         ],
     ];
 
@@ -74,7 +77,7 @@ trait Themes
             return static::$theme;
         }
 
-        if (! isset(static::$themes[$name])) {
+        if (!isset(static::$themes[$name])) {
             throw new InvalidArgumentException("Prompt theme [{$name}] not found.");
         }
 
