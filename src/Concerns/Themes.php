@@ -9,6 +9,7 @@ use Laravel\Prompts\Kanban;
 use Laravel\Prompts\MediaPlayer;
 use Laravel\Prompts\MultiSearchPrompt;
 use Laravel\Prompts\MultiSelectPrompt;
+use Laravel\Prompts\NortonCommander;
 use Laravel\Prompts\Note;
 use Laravel\Prompts\PasswordPrompt;
 use Laravel\Prompts\Progress;
@@ -24,6 +25,7 @@ use Laravel\Prompts\Themes\Default\KanbanRenderer;
 use Laravel\Prompts\Themes\Default\MediaPlayerRenderer;
 use Laravel\Prompts\Themes\Default\MultiSearchPromptRenderer;
 use Laravel\Prompts\Themes\Default\MultiSelectPromptRenderer;
+use Laravel\Prompts\Themes\Default\NortonCommanderRenderer;
 use Laravel\Prompts\Themes\Default\NoteRenderer;
 use Laravel\Prompts\Themes\Default\PasswordPromptRenderer;
 use Laravel\Prompts\Themes\Default\ProgressRenderer;
@@ -63,6 +65,7 @@ trait Themes
             DataTable::class => DataTableRenderer::class,
             Kanban::class => KanbanRenderer::class,
             MediaPlayer::class => MediaPlayerRenderer::class,
+            NortonCommander::class => NortonCommanderRenderer::class,
         ],
     ];
 
@@ -77,7 +80,7 @@ trait Themes
             return static::$theme;
         }
 
-        if (! isset(static::$themes[$name])) {
+        if (!isset(static::$themes[$name])) {
             throw new InvalidArgumentException("Prompt theme [{$name}] not found.");
         }
 
