@@ -27,7 +27,7 @@ class ProgressRenderer extends Renderer
                 ->box(
                     $this->dim($this->truncate($progress->label, $progress->terminal()->cols() - 6)),
                     $this->dim($filled),
-                    info: $progress->progress.'/'.$progress->total,
+                    info: $progress->progress . '/' . $progress->total,
                 ),
 
             'error' => $this
@@ -35,7 +35,7 @@ class ProgressRenderer extends Renderer
                     $this->truncate($progress->label, $progress->terminal()->cols() - 6),
                     $this->dim($filled),
                     color: 'red',
-                    info: $progress->progress.'/'.$progress->total,
+                    info: $progress->progress . '/' . $progress->total,
                 ),
 
             'cancel' => $this
@@ -43,7 +43,7 @@ class ProgressRenderer extends Renderer
                     $this->truncate($progress->label, $progress->terminal()->cols() - 6),
                     $this->dim($filled),
                     color: 'red',
-                    info: $progress->progress.'/'.$progress->total,
+                    info: $progress->progress . '/' . $progress->total,
                 )
                 ->error('Cancelled.'),
 
@@ -51,7 +51,7 @@ class ProgressRenderer extends Renderer
                 ->box(
                     $this->cyan($this->truncate($progress->label, $progress->terminal()->cols() - 6)),
                     $this->dim($filled),
-                    info: $progress->progress.'/'.$progress->total,
+                    info: $progress->progress . '/' . $progress->total,
                 )
                 ->when(
                     $progress->hint,

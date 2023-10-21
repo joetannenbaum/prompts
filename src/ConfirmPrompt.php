@@ -28,9 +28,9 @@ class ConfirmPrompt extends Prompt
         $this->on('key', fn ($key) => match ($key) {
             'y' => $this->confirmed = true,
             'n' => $this->confirmed = false,
-            Key::TAB, Key::UP, Key::UP_ARROW, Key::DOWN, Key::DOWN_ARROW, Key::LEFT, Key::LEFT_ARROW, Key::RIGHT, Key::RIGHT_ARROW, Key::CTRL_P, Key::CTRL_F, Key::CTRL_N, Key::CTRL_B, 'h', 'j', 'k', 'l' => $this->confirmed = ! $this->confirmed,
+            Key::TAB, Key::UP, Key::UP_ARROW, Key::DOWN, Key::DOWN_ARROW, Key::LEFT, Key::LEFT_ARROW, Key::RIGHT, Key::RIGHT_ARROW, Key::CTRL_P, Key::CTRL_F, Key::CTRL_N, Key::CTRL_B, 'h', 'j', 'k', 'l' => $this->confirmed = !$this->confirmed,
             Key::ENTER => $this->submit(),
-            default => null,
+            default    => null,
         });
     }
 

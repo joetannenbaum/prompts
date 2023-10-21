@@ -160,8 +160,8 @@ abstract class Prompt
     {
         match (true) {
             method_exists(static::output(), 'writeDirectly') => static::output()->writeDirectly($message),
-            method_exists(static::output(), 'getOutput') => static::output()->getOutput()->write($message),
-            default => static::output()->write($message),
+            method_exists(static::output(), 'getOutput')     => static::output()->getOutput()->write($message),
+            default                                          => static::output()->write($message),
         };
     }
 

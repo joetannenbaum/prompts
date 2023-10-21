@@ -2,7 +2,7 @@
 
 use function Laravel\Prompts\progress;
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $states = [
     'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado',
@@ -19,7 +19,7 @@ progress(
             $progress->label = 'Arkansas is not a state! Nice try.';
         }
 
-        return $item.' added.';
+        return $item . ' added.';
     },
 );
 
@@ -29,8 +29,8 @@ progress(
     callback: function ($item, $progress) {
         usleep(250_000);
         $progress
-            ->label('Adding '.$item)
-            ->hint("{$item} has ".strlen($item).' characters');
+            ->label('Adding ' . $item)
+            ->hint("{$item} has " . strlen($item) . ' characters');
     },
 );
 

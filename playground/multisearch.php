@@ -2,18 +2,18 @@
 
 use function Laravel\Prompts\multisearch;
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $users = collect([
     'taylor' => 'Taylor Otwell',
-    'dries' => 'Dries Vints',
-    'james' => 'James Brooks',
-    'nuno' => 'Nuno Maduro',
-    'mior' => 'Mior Muhammad Zaki',
-    'jess' => 'Jess Archer',
-    'guus' => 'Guus Leeuw',
-    'tim' => 'Tim MacDonald',
-    'joe' => 'Joe Dixon',
+    'dries'  => 'Dries Vints',
+    'james'  => 'James Brooks',
+    'nuno'   => 'Nuno Maduro',
+    'mior'   => 'Mior Muhammad Zaki',
+    'jess'   => 'Jess Archer',
+    'guus'   => 'Guus Leeuw',
+    'tim'    => 'Tim MacDonald',
+    'joe'    => 'Joe Dixon',
 ]);
 
 $selected = multisearch(

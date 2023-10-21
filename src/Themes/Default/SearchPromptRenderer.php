@@ -72,7 +72,7 @@ class SearchPromptRenderer extends Renderer implements Scrolling
         return preg_replace(
             '/\s$/',
             $this->cyan('…'),
-            $this->pad($prompt->valueWithCursor($maxWidth - 1).'  ', min($this->longest($prompt->matches(), padding: 2), $maxWidth))
+            $this->pad($prompt->valueWithCursor($maxWidth - 1) . '  ', min($this->longest($prompt->matches(), padding: 2), $maxWidth))
         );
     }
 
@@ -103,7 +103,7 @@ class SearchPromptRenderer extends Renderer implements Scrolling
     protected function renderOptions(SearchPrompt $prompt): string
     {
         if ($prompt->searchValue() !== '' && empty($prompt->matches())) {
-            return $this->gray('  '.($prompt->state === 'searching' ? 'Searching...' : 'No results.'));
+            return $this->gray('  ' . ($prompt->state === 'searching' ? 'Searching...' : 'No results.'));
         }
 
         return $this->scrollbar(

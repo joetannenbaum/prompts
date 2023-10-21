@@ -57,9 +57,9 @@ class SuggestPrompt extends Prompt
         $this->on('key', fn ($key) => match ($key) {
             Key::UP, Key::UP_ARROW, Key::SHIFT_TAB, Key::CTRL_P => $this->highlightPrevious(),
             Key::DOWN, Key::DOWN_ARROW, Key::TAB, Key::CTRL_N => $this->highlightNext(),
-            Key::ENTER => $this->selectHighlighted(),
+            Key::ENTER                                                                                                                                            => $this->selectHighlighted(),
             Key::oneOf([Key::LEFT, Key::LEFT_ARROW, Key::RIGHT, Key::RIGHT_ARROW, Key::CTRL_B, Key::CTRL_F, Key::HOME, Key::END, Key::CTRL_A, Key::CTRL_E], $key) => $this->highlighted = null,
-            default => (function () {
+            default                                                                                                                                               => (function () {
                 $this->highlighted = null;
                 $this->matches = null;
                 $this->firstVisible = 0;

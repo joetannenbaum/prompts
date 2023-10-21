@@ -28,9 +28,9 @@ it('accepts an array of keys and labels', function () {
     $result = select(
         label: 'What is your favorite color?',
         options: [
-            'red' => 'Red',
+            'red'   => 'Red',
             'green' => 'Green',
-            'blue' => 'Blue',
+            'blue'  => 'Blue',
         ]
     );
 
@@ -89,9 +89,9 @@ it('accepts default values when the options are keys with labels', function () {
     $result = select(
         label: 'What is your favorite color?',
         options: [
-            'red' => 'Red',
+            'red'   => 'Red',
             'green' => 'Green',
-            'blue' => 'Blue',
+            'blue'  => 'Blue',
         ],
         default: 'green'
     );
@@ -105,9 +105,9 @@ it('validates', function () {
     $result = select(
         label: 'What is your favorite color?',
         options: [
-            'red' => 'Red',
+            'red'   => 'Red',
             'green' => 'Green',
-            'blue' => 'Blue',
+            'blue'  => 'Blue',
         ],
         validate: fn ($value) => $value === 'red' ? 'You can\'t choose red.' : null
     );
@@ -189,7 +189,7 @@ it('scrolls to the bottom when the default value is near the end', function (int
     }
 })->with([
     'odd' => [
-        'scroll' => 5,
+        'scroll'         => 5,
         'outputContains' => [
             'Orange',
             'Purple',
@@ -199,7 +199,7 @@ it('scrolls to the bottom when the default value is near the end', function (int
         ],
     ],
     'even' => [
-        'scroll' => 6,
+        'scroll'         => 6,
         'outputContains' => [
             'Yellow',
             'Orange',

@@ -37,10 +37,10 @@ class KanbanRenderer extends Renderer
                 $this->newLine();
                 $this->box(
                     $kanban->state === 'pendingDelete' ? $this->dim($card['title']) : $card['title'],
-                    PHP_EOL.
+                    PHP_EOL .
                         ($kanban->state === 'pendingDelete' ? $this->dim(
                             $card['description']
-                        ) : $card['description']).PHP_EOL,
+                        ) : $card['description']) . PHP_EOL,
                     '',
                     $cardIndex == $kanban->itemIndex && $kanban->columnIndex === $columnIndex ? 'green' : 'dim',
                 );
@@ -67,7 +67,7 @@ class KanbanRenderer extends Renderer
 
         $this->output = '';
 
-        $lines = collect($columns->shift())->zip(...$columns)->map(fn ($lines) => $lines[0].$lines[1].$lines[2]);
+        $lines = collect($columns->shift())->zip(...$columns)->map(fn ($lines) => $lines[0] . $lines[1] . $lines[2]);
 
         if ($kanban->state === 'pendingDelete') {
             if ($kanban->modalAnimating) {
@@ -86,23 +86,23 @@ class KanbanRenderer extends Renderer
     {
         $this->minWidth = 0;
 
-        $body = collect(['Are you sure you want to delete '.$this->bold($kanban->items[$kanban->columnIndex][$kanban->itemIndex]['title']).'?'])
-            ->map(fn ($line) => str_repeat(' ', 10).$line.str_repeat(' ', 10));
+        $body = collect(['Are you sure you want to delete ' . $this->bold($kanban->items[$kanban->columnIndex][$kanban->itemIndex]['title']) . '?'])
+            ->map(fn ($line) => str_repeat(' ', 10) . $line . str_repeat(' ', 10));
 
         $bodyWidth = mb_strlen($this->stripEscapeSequences($body->first()));
 
-        $confirmActive = $this->bgRed(str_repeat(' ', 11)).PHP_EOL.$this->bgRed($this->white('  Confirm  ')).PHP_EOL.$this->bgRed(str_repeat(' ', 11));
-        $confirmInactive = str_repeat(' ', 11).PHP_EOL.$this->dim('  Confirm  ').PHP_EOL.str_repeat(' ', 11);
+        $confirmActive = $this->bgRed(str_repeat(' ', 11)) . PHP_EOL . $this->bgRed($this->white('  Confirm  ')) . PHP_EOL . $this->bgRed(str_repeat(' ', 11));
+        $confirmInactive = str_repeat(' ', 11) . PHP_EOL . $this->dim('  Confirm  ') . PHP_EOL . str_repeat(' ', 11);
 
         $confirm = $kanban->deleteAction === 'confirm' ? $confirmActive : $confirmInactive;
 
-        $cancelActive = $this->bgWhite(str_repeat(' ', 10)).PHP_EOL.$this->bgWhite($this->white('  Cancel  ')).PHP_EOL.$this->bgWhite(str_repeat(' ', 10));
-        $cancelInactive = str_repeat(' ', 10).PHP_EOL.$this->dim('  Cancel  ').PHP_EOL.str_repeat(' ', 10);
+        $cancelActive = $this->bgWhite(str_repeat(' ', 10)) . PHP_EOL . $this->bgWhite($this->white('  Cancel  ')) . PHP_EOL . $this->bgWhite(str_repeat(' ', 10));
+        $cancelInactive = str_repeat(' ', 10) . PHP_EOL . $this->dim('  Cancel  ') . PHP_EOL . str_repeat(' ', 10);
 
         $cancel = $kanban->deleteAction === 'cancel' ? $cancelActive : $cancelInactive;
 
-        $buttons = collect(explode(PHP_EOL, $cancel))->zip(explode(PHP_EOL, $confirm))->map(fn ($lines) => $lines[0].str_repeat(' ', 5).$lines[1])
-            ->map(fn ($line) => str_repeat(' ', ($bodyWidth - mb_strlen($this->stripEscapeSequences($line))) / 2).$line)
+        $buttons = collect(explode(PHP_EOL, $cancel))->zip(explode(PHP_EOL, $confirm))->map(fn ($lines) => $lines[0] . str_repeat(' ', 5) . $lines[1])
+            ->map(fn ($line) => str_repeat(' ', ($bodyWidth - mb_strlen($this->stripEscapeSequences($line))) / 2) . $line)
             ->implode(PHP_EOL);
 
         $body->push($buttons);
@@ -111,7 +111,7 @@ class KanbanRenderer extends Renderer
 
         $modal = $this->box(
             '',
-            str_repeat(PHP_EOL, 2).$body.str_repeat(PHP_EOL, 2),
+            str_repeat(PHP_EOL, 2) . $body . str_repeat(PHP_EOL, 2),
             '',
             'red',
         );
@@ -194,7 +194,7 @@ class KanbanRenderer extends Renderer
 
             $afterModal = implode('', array_reverse($afterModal));
 
-            $lines[$currentIndex] = $this->dim($beforeModal).$this->reset('').$line.$this->reset('').$this->dim($afterModal);
+            $lines[$currentIndex] = $this->dim($beforeModal) . $this->reset('') . $line . $this->reset('') . $this->dim($afterModal);
         }
 
         $kanban->modalFrames++;
@@ -207,23 +207,23 @@ class KanbanRenderer extends Renderer
     {
         $this->minWidth = 0;
 
-        $body = collect(['Are you sure you want to delete '.$this->bold($kanban->items[$kanban->columnIndex][$kanban->itemIndex]['title']).'?'])
-            ->map(fn ($line) => str_repeat(' ', 10).$line.str_repeat(' ', 10));
+        $body = collect(['Are you sure you want to delete ' . $this->bold($kanban->items[$kanban->columnIndex][$kanban->itemIndex]['title']) . '?'])
+            ->map(fn ($line) => str_repeat(' ', 10) . $line . str_repeat(' ', 10));
 
         $bodyWidth = mb_strlen($this->stripEscapeSequences($body->first()));
 
-        $confirmActive = $this->bgRed(str_repeat(' ', 11)).PHP_EOL.$this->bgRed($this->white('  Confirm  ')).PHP_EOL.$this->bgRed(str_repeat(' ', 11));
-        $confirmInactive = str_repeat(' ', 11).PHP_EOL.$this->dim('  Confirm  ').PHP_EOL.str_repeat(' ', 11);
+        $confirmActive = $this->bgRed(str_repeat(' ', 11)) . PHP_EOL . $this->bgRed($this->white('  Confirm  ')) . PHP_EOL . $this->bgRed(str_repeat(' ', 11));
+        $confirmInactive = str_repeat(' ', 11) . PHP_EOL . $this->dim('  Confirm  ') . PHP_EOL . str_repeat(' ', 11);
 
         $confirm = $kanban->deleteAction === 'confirm' ? $confirmActive : $confirmInactive;
 
-        $cancelActive = $this->bgWhite(str_repeat(' ', 10)).PHP_EOL.$this->bgWhite($this->white('  Cancel  ')).PHP_EOL.$this->bgWhite(str_repeat(' ', 10));
-        $cancelInactive = str_repeat(' ', 10).PHP_EOL.$this->dim('  Cancel  ').PHP_EOL.str_repeat(' ', 10);
+        $cancelActive = $this->bgWhite(str_repeat(' ', 10)) . PHP_EOL . $this->bgWhite($this->white('  Cancel  ')) . PHP_EOL . $this->bgWhite(str_repeat(' ', 10));
+        $cancelInactive = str_repeat(' ', 10) . PHP_EOL . $this->dim('  Cancel  ') . PHP_EOL . str_repeat(' ', 10);
 
         $cancel = $kanban->deleteAction === 'cancel' ? $cancelActive : $cancelInactive;
 
-        $buttons = collect(explode(PHP_EOL, $cancel))->zip(explode(PHP_EOL, $confirm))->map(fn ($lines) => $lines[0].str_repeat(' ', 5).$lines[1])
-            ->map(fn ($line) => str_repeat(' ', ($bodyWidth - mb_strlen($this->stripEscapeSequences($line))) / 2).$line)
+        $buttons = collect(explode(PHP_EOL, $cancel))->zip(explode(PHP_EOL, $confirm))->map(fn ($lines) => $lines[0] . str_repeat(' ', 5) . $lines[1])
+            ->map(fn ($line) => str_repeat(' ', ($bodyWidth - mb_strlen($this->stripEscapeSequences($line))) / 2) . $line)
             ->implode(PHP_EOL);
 
         $body->push($buttons);
@@ -232,7 +232,7 @@ class KanbanRenderer extends Renderer
 
         $modal = $this->box(
             '',
-            str_repeat(PHP_EOL, 2).$body.str_repeat(PHP_EOL, 2),
+            str_repeat(PHP_EOL, 2) . $body . str_repeat(PHP_EOL, 2),
             '',
             'red',
         );
@@ -306,7 +306,7 @@ class KanbanRenderer extends Renderer
 
             $afterModal = implode('', array_reverse($afterModal));
 
-            $lines[$currentIndex] = $this->dim($beforeModal).$this->reset('').$line.$this->reset('').$this->dim($afterModal);
+            $lines[$currentIndex] = $this->dim($beforeModal) . $this->reset('') . $line . $this->reset('') . $this->dim($afterModal);
         }
 
         return $lines;

@@ -2,7 +2,7 @@
 
 use function Laravel\Prompts\kanban;
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $value = kanban();
 

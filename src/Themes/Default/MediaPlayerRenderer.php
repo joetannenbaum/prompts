@@ -17,12 +17,13 @@ class MediaPlayerRenderer extends Renderer
     protected int $searchWidth = 60;
 
     protected array $frames = ['⠂', '⠒', '⠐', '⠰', '⠠', '⠤', '⠄', '⠆'];
+
     protected array $playerFrame = [
-        "▄▁▆",
-        "▃▄▆",
-        "▅█▇",
-        "▃▇▅",
-        "▄▂▅",
+        '▄▁▆',
+        '▃▄▆',
+        '▅█▇',
+        '▃▇▅',
+        '▄▂▅',
     ];
 
     /**

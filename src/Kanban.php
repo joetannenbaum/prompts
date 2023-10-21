@@ -9,31 +9,31 @@ class Kanban extends Prompt
     public array $items = [
         [
             [
-                'title' => 'Make Kanban Board',
+                'title'       => 'Make Kanban Board',
                 'description' => 'But in the terminal?',
             ],
             [
-                'title' => 'Eat Pizza',
+                'title'       => 'Eat Pizza',
                 'description' => '(Whole pie).',
             ],
         ],
         [
             [
-                'title' => 'Get Milk',
+                'title'       => 'Get Milk',
                 'description' => 'From the store (whole).',
             ],
             [
-                'title' => 'Learn Go',
+                'title'       => 'Learn Go',
                 'description' => 'Charm CLI looks dope.',
             ],
             [
-                'title' => 'Submit Statamic PR',
+                'title'       => 'Submit Statamic PR',
                 'description' => 'Nocache tag fix.',
             ],
         ],
         [
             [
-                'title' => 'Wait Patiently',
+                'title'       => 'Wait Patiently',
                 'description' => 'For the next prompt.',
             ],
         ],
@@ -80,7 +80,7 @@ class Kanban extends Prompt
                     Key::RIGHT, Key::RIGHT_ARROW => $this->nextColumn(),
                     Key::LEFT, Key::LEFT_ARROW => $this->previousColumn(),
                     Key::DELETE => $this->pendingDelete(),
-                    default => null,
+                    default     => null,
                 };
 
                 return;
@@ -94,10 +94,10 @@ class Kanban extends Prompt
                     return;
                 } else {
                     match ($key) {
-                        'q' => $this->quit(),
-                        'n' => $this->addNewItem(),
-                        'd' => $this->pendingDeleteAnimated(),
-                        'e' => $this->pendingDeleteAnimatedEasing(),
+                        'q'     => $this->quit(),
+                        'n'     => $this->addNewItem(),
+                        'd'     => $this->pendingDeleteAnimated(),
+                        'e'     => $this->pendingDeleteAnimatedEasing(),
                         default => null,
                     };
                 }
@@ -129,7 +129,7 @@ class Kanban extends Prompt
         $description = text('Description', 'Description of task');
 
         $this->items[$this->columnIndex][] = [
-            'title' => $title,
+            'title'       => $title,
             'description' => $description,
         ];
 

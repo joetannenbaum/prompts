@@ -54,9 +54,9 @@ it('supports default results', function ($options, $expected) {
 })->with([
     'associative' => [
         fn ($value) => collect([
-            'red' => 'Red',
+            'red'   => 'Red',
             'green' => 'Green',
-            'blue' => 'Blue',
+            'blue'  => 'Blue',
         ])->when(
             strlen($value),
             fn ($colors) => $colors->filter(fn ($label) => str_contains(strtolower($label), strtolower($value)))
@@ -116,9 +116,9 @@ it('supports no default results', function ($options, $expected) {
 })->with([
     'associative' => [
         fn ($value) => strlen($value) > 0 ? collect([
-            'red' => 'Red',
+            'red'   => 'Red',
             'green' => 'Green',
-            'blue' => 'Blue',
+            'blue'  => 'Blue',
         ])->filter(fn ($label) => str_contains(strtolower($label), strtolower($value)))->all() : [],
         ['blue', 'green'],
     ],
@@ -137,11 +137,11 @@ it('validates', function () {
     $result = multisearch(
         label: 'What are your favorite colors?',
         options: fn () => [
-            'red' => 'Red',
+            'red'   => 'Red',
             'green' => 'Green',
-            'blue' => 'Blue',
+            'blue'  => 'Blue',
         ],
-        validate: fn ($value) => ! in_array('green', $value) ? 'Please choose green.' : null
+        validate: fn ($value) => !in_array('green', $value) ? 'Please choose green.' : null
     );
 
     expect($result)->toBe(['red', 'green']);
@@ -161,9 +161,9 @@ it('can fall back', function () {
     $result = multisearch(
         label: 'What are your favorite colors?',
         options: fn () => [
-            'red' => 'Red',
+            'red'   => 'Red',
             'green' => 'Green',
-            'blue' => 'Blue',
+            'blue'  => 'Blue',
         ],
     );
 

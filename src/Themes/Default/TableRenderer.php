@@ -35,7 +35,7 @@ class TableRenderer extends Renderer
             ->render();
 
         collect(explode(PHP_EOL, trim($buffered->content(), PHP_EOL)))
-            ->each(fn ($line) => $this->line(' '.$line));
+            ->each(fn ($line) => $this->line(' ' . $line));
 
         return $this;
     }

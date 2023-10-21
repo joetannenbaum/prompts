@@ -2,7 +2,7 @@
 
 use function Laravel\Prompts\suggest;
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $model = suggest(
     label: 'What model should the policy apply to?',
@@ -19,7 +19,7 @@ $model = suggest(
     ],
     validate: fn ($value) => match (true) {
         strlen($value) === 0 => 'Please enter a model name.',
-        default => null,
+        default              => null,
     },
     hint: 'The model name should be singular.',
 );

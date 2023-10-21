@@ -65,7 +65,7 @@ class ConfirmPromptRenderer extends Renderer
         }
 
         return $prompt->confirmed
-            ? "{$this->green('●')} {$yes} {$this->dim('/ ○ '.$no)}"
-            : "{$this->dim('○ '.$yes.' /')} {$this->green('●')} {$no}";
+            ? "{$this->green('●')} {$yes} {$this->dim('/ ○ ' . $no)}"
+            : "{$this->dim('○ ' . $yes . ' /')} {$this->green('●')} {$no}";
     }
 }

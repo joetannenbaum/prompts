@@ -40,9 +40,9 @@ it('renders a progress bar', function ($steps) {
      └───────────────────────────────────────────────────────── 4/4 ┘
     OUTPUT);
 })->with([
-    'array' => [['Alabama', 'Alaska', 'Arizona', 'Arkansas']],
+    'array'      => [['Alabama', 'Alaska', 'Arizona', 'Arkansas']],
     'collection' => [collect(['Alabama', 'Alaska', 'Arizona', 'Arkansas'])],
-    'integer' => [4],
+    'integer'    => [4],
 ]);
 
 it('renders a progress bar without a label', function () {

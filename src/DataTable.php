@@ -86,9 +86,9 @@ class DataTable extends Prompt
                     return;
                 } else {
                     match ($key) {
-                        'q' => $this->quit(),
-                        '/' => $this->search(),
-                        'j' => $this->jump(),
+                        'q'     => $this->quit(),
+                        '/'     => $this->search(),
+                        'j'     => $this->jump(),
                         default => null,
                     };
                 }
@@ -111,8 +111,8 @@ class DataTable extends Prompt
                     Key::RIGHT, Key::RIGHT_ARROW, Key::CTRL_F => $this->cursorPosition = min(mb_strlen($this->query), $this->cursorPosition + 1),
                     Key::HOME, Key::CTRL_A => $this->cursorPosition = 0,
                     Key::END, Key::CTRL_E => $this->cursorPosition = mb_strlen($this->query),
-                    Key::DELETE => $this->query = mb_substr($this->query, 0, $this->cursorPosition).mb_substr($this->query, $this->cursorPosition + 1),
-                    default => null,
+                    Key::DELETE => $this->query = mb_substr($this->query, 0, $this->cursorPosition) . mb_substr($this->query, $this->cursorPosition + 1),
+                    default     => null,
                 };
 
                 return;
@@ -131,10 +131,10 @@ class DataTable extends Prompt
                         return;
                     }
 
-                    $this->query = mb_substr($this->query, 0, $this->cursorPosition - 1).mb_substr($this->query, $this->cursorPosition);
+                    $this->query = mb_substr($this->query, 0, $this->cursorPosition - 1) . mb_substr($this->query, $this->cursorPosition);
                     $this->cursorPosition--;
                 } elseif (ord($key) >= 32) {
-                    $this->query = mb_substr($this->query, 0, $this->cursorPosition).$key.mb_substr($this->query, $this->cursorPosition);
+                    $this->query = mb_substr($this->query, 0, $this->cursorPosition) . $key . mb_substr($this->query, $this->cursorPosition);
                     $this->cursorPosition++;
                 }
             }
@@ -156,8 +156,8 @@ class DataTable extends Prompt
                     Key::RIGHT, Key::RIGHT_ARROW, Key::CTRL_F => $this->cursorPosition = min(mb_strlen($this->jumpToPage), $this->cursorPosition + 1),
                     Key::HOME, Key::CTRL_A => $this->cursorPosition = 0,
                     Key::END, Key::CTRL_E => $this->cursorPosition = mb_strlen($this->jumpToPage),
-                    Key::DELETE => $this->jumpToPage = mb_substr($this->jumpToPage, 0, $this->cursorPosition).mb_substr($this->jumpToPage, $this->cursorPosition + 1),
-                    default => null,
+                    Key::DELETE => $this->jumpToPage = mb_substr($this->jumpToPage, 0, $this->cursorPosition) . mb_substr($this->jumpToPage, $this->cursorPosition + 1),
+                    default     => null,
                 };
 
                 return;
@@ -180,10 +180,10 @@ class DataTable extends Prompt
                         return;
                     }
 
-                    $this->jumpToPage = mb_substr($this->jumpToPage, 0, $this->cursorPosition - 1).mb_substr($this->jumpToPage, $this->cursorPosition);
+                    $this->jumpToPage = mb_substr($this->jumpToPage, 0, $this->cursorPosition - 1) . mb_substr($this->jumpToPage, $this->cursorPosition);
                     $this->cursorPosition--;
                 } elseif (ord($key) >= 32) {
-                    $this->jumpToPage = mb_substr($this->jumpToPage, 0, $this->cursorPosition).$key.mb_substr($this->jumpToPage, $this->cursorPosition);
+                    $this->jumpToPage = mb_substr($this->jumpToPage, 0, $this->cursorPosition) . $key . mb_substr($this->jumpToPage, $this->cursorPosition);
                     $this->cursorPosition++;
                 }
             }

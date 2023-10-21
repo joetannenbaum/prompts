@@ -12,7 +12,7 @@ class CommanderPanel
 
     public int $selectedIndex = 0;
 
-    public function __construct(?string $startingDir = null)
+    public function __construct(string $startingDir = null)
     {
         $this->currentDir = $startingDir ?? getcwd() . '/vendor';
         $this->files = $this->getFiles();
@@ -23,10 +23,10 @@ class CommanderPanel
         return collect(scandir($this->currentDir))
             ->reject(fn ($file) => in_array($file, ['.', '..']))
             ->map(fn ($file) => [
-                'name' => $file,
-                'type' => is_dir($this->currentDir . '/' . $file) ? 'dir' : 'file',
+                'name'      => $file,
+                'type'      => is_dir($this->currentDir . '/' . $file) ? 'dir' : 'file',
                 'extension' => pathinfo($file, PATHINFO_EXTENSION),
-                'filename' => pathinfo($file, PATHINFO_FILENAME),
+                'filename'  => pathinfo($file, PATHINFO_FILENAME),
             ])
             ->sortBy(fn ($file) => $file['type'] === 'dir' ? 0 : 1)
             ->values()

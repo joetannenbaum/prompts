@@ -46,8 +46,8 @@ class MediaPlayer extends Prompt
                     Key::RIGHT, Key::RIGHT_ARROW, Key::CTRL_F => $this->cursorPosition = min(mb_strlen($this->query), $this->cursorPosition + 1),
                     Key::HOME, Key::CTRL_A => $this->cursorPosition = 0,
                     Key::END, Key::CTRL_E => $this->cursorPosition = mb_strlen($this->query),
-                    Key::DELETE => $this->query = mb_substr($this->query, 0, $this->cursorPosition).mb_substr($this->query, $this->cursorPosition + 1),
-                    default => null,
+                    Key::DELETE => $this->query = mb_substr($this->query, 0, $this->cursorPosition) . mb_substr($this->query, $this->cursorPosition + 1),
+                    default     => null,
                 };
 
                 return;
@@ -65,10 +65,10 @@ class MediaPlayer extends Prompt
                         return;
                     }
 
-                    $this->query = mb_substr($this->query, 0, $this->cursorPosition - 1).mb_substr($this->query, $this->cursorPosition);
+                    $this->query = mb_substr($this->query, 0, $this->cursorPosition - 1) . mb_substr($this->query, $this->cursorPosition);
                     $this->cursorPosition--;
                 } elseif (ord($key) >= 32) {
-                    $this->query = mb_substr($this->query, 0, $this->cursorPosition).$key.mb_substr($this->query, $this->cursorPosition);
+                    $this->query = mb_substr($this->query, 0, $this->cursorPosition) . $key . mb_substr($this->query, $this->cursorPosition);
                     $this->cursorPosition++;
                 }
             }
@@ -80,7 +80,7 @@ class MediaPlayer extends Prompt
         if ($this->playing) {
             $this->playing = false;
             exec('spotify pause');
-        } else if (($this->currentTrackIndex ?? -1) === $this->resultIndex) {
+        } elseif (($this->currentTrackIndex ?? -1) === $this->resultIndex) {
             $this->playing = true;
             exec('spotify play');
         } else {
@@ -130,45 +130,45 @@ class MediaPlayer extends Prompt
         $this->results = [
             [
                 'artist' => 'Noah Kahan',
-                'title' => 'Northern Attitude',
-                'key' => 'northern-attitude',
-                'url' => 'https://open.spotify.com/track/4O2rRsoSPb5aN7N3tG6Y3v?si=4762b991973841c6',
+                'title'  => 'Northern Attitude',
+                'key'    => 'northern-attitude',
+                'url'    => 'https://open.spotify.com/track/4O2rRsoSPb5aN7N3tG6Y3v?si=4762b991973841c6',
             ],
             [
                 'artist' => 'Noah Kahan',
-                'title' => 'Stick Season',
-                'key' => 'stick-season',
-                'url' => 'https://open.spotify.com/track/0mflMxspEfB0VbI1kyLiAv?si=6021de620f1e487f',
+                'title'  => 'Stick Season',
+                'key'    => 'stick-season',
+                'url'    => 'https://open.spotify.com/track/0mflMxspEfB0VbI1kyLiAv?si=6021de620f1e487f',
             ],
             [
                 'artist' => 'Noah Kahan',
-                'title' => 'All My Love',
-                'key' => 'all-my-love',
-                'url' => 'https://open.spotify.com/track/7ByxizhA4GgEf7Sxomxhze?si=8b801627660f48e3',
+                'title'  => 'All My Love',
+                'key'    => 'all-my-love',
+                'url'    => 'https://open.spotify.com/track/7ByxizhA4GgEf7Sxomxhze?si=8b801627660f48e3',
             ],
             [
                 'artist' => 'Noah Kahan',
-                'title' => 'She Calls Me Back',
-                'key' => 'she-calls-me-back',
-                'url' => 'https://open.spotify.com/track/1LvU6IFqQnXOIwJyBDb2io?si=d8b910a7354349d2',
+                'title'  => 'She Calls Me Back',
+                'key'    => 'she-calls-me-back',
+                'url'    => 'https://open.spotify.com/track/1LvU6IFqQnXOIwJyBDb2io?si=d8b910a7354349d2',
             ],
             [
                 'artist' => 'Noah Kahan',
-                'title' => 'Come Over',
-                'key' => 'come-over',
-                'url' => 'https://open.spotify.com/track/2NmaDAnnP9zspaHLc5aSjb?si=4b70d74235154d2f',
+                'title'  => 'Come Over',
+                'key'    => 'come-over',
+                'url'    => 'https://open.spotify.com/track/2NmaDAnnP9zspaHLc5aSjb?si=4b70d74235154d2f',
             ],
             [
                 'artist' => 'Noah Kahan',
-                'title' => 'New Perspective',
-                'key' => 'new-perspective',
-                'url' => 'https://open.spotify.com/track/1M39ETXmej4g9EMSeXPUgj?si=7d1a78311e74404a',
+                'title'  => 'New Perspective',
+                'key'    => 'new-perspective',
+                'url'    => 'https://open.spotify.com/track/1M39ETXmej4g9EMSeXPUgj?si=7d1a78311e74404a',
             ],
             [
                 'artist' => 'Noah Kahan',
-                'title' => 'Everywhere, Everything',
-                'key' => 'everywhere-everything',
-                'url' => 'https://open.spotify.com/track/32iNr3J93tqFkxaMYwdRYi?si=b7e0c6014226456d',
+                'title'  => 'Everywhere, Everything',
+                'key'    => 'everywhere-everything',
+                'url'    => 'https://open.spotify.com/track/32iNr3J93tqFkxaMYwdRYi?si=b7e0c6014226456d',
             ],
         ];
 
@@ -227,7 +227,7 @@ class MediaPlayer extends Prompt
             $i++;
         }
 
-        $this->lyrics = explode(PHP_EOL, file_get_contents(__DIR__.'/../lyrics/'.$result['key'].'.txt'));
+        $this->lyrics = explode(PHP_EOL, file_get_contents(__DIR__ . '/../lyrics/' . $result['key'] . '.txt'));
 
         $this->lyricsIndex = 0;
 
@@ -257,7 +257,7 @@ class MediaPlayer extends Prompt
                 if ($key === 'p') {
                     $this->handlePlayPause();
                     $this->showPlayingIndicator();
-                } else if ($this->playing) {
+                } elseif ($this->playing) {
                     $this->showPlayingIndicator();
                 }
             }

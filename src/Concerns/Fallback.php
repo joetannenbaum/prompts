@@ -53,7 +53,7 @@ trait Fallback
         $fallback = static::$fallbacks[static::class] ?? null;
 
         if ($fallback === null) {
-            throw new RuntimeException('No fallback implementation registered for ['.static::class.']');
+            throw new RuntimeException('No fallback implementation registered for [' . static::class . ']');
         }
 
         return $fallback($this);

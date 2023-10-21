@@ -88,7 +88,7 @@ class Terminal
             2 => ['pipe', 'w'],
         ], $pipes);
 
-        if (! $process) {
+        if (!$process) {
             throw new RuntimeException('Failed to create process.');
         }
 

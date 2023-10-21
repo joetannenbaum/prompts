@@ -3,11 +3,9 @@
 namespace Laravel\Prompts\Themes\Default;
 
 use Laravel\Prompts\CommanderPanel;
-use Laravel\Prompts\DataTable;
 use Laravel\Prompts\NortonCommander;
 use Laravel\Prompts\Output\BufferedConsoleOutput;
 use Symfony\Component\Console\Helper\Table as SymfonyTable;
-use Symfony\Component\Console\Helper\TableCell;
 use Symfony\Component\Console\Helper\TableCellStyle;
 use Symfony\Component\Console\Helper\TableStyle;
 

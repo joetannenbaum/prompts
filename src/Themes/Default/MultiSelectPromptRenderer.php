@@ -35,7 +35,7 @@ class MultiSelectPromptRenderer extends Renderer implements Scrolling
                     $this->truncate($prompt->label, $prompt->terminal()->cols() - 6),
                     $this->renderOptions($prompt),
                     color: 'yellow',
-                    info: count($prompt->options) > $prompt->scroll ? (count($prompt->value()).' selected') : '',
+                    info: count($prompt->options) > $prompt->scroll ? (count($prompt->value()) . ' selected') : '',
                 )
                 ->warning($this->truncate($prompt->error, $prompt->terminal()->cols() - 5)),
 
@@ -43,7 +43,7 @@ class MultiSelectPromptRenderer extends Renderer implements Scrolling
                 ->box(
                     $this->cyan($this->truncate($prompt->label, $prompt->terminal()->cols() - 6)),
                     $this->renderOptions($prompt),
-                    info: count($prompt->options) > $prompt->scroll ? (count($prompt->value()).' selected') : '',
+                    info: count($prompt->options) > $prompt->scroll ? (count($prompt->value()) . ' selected') : '',
                 )
                 ->when(
                     $prompt->hint,
@@ -74,17 +74,17 @@ class MultiSelectPromptRenderer extends Renderer implements Scrolling
                     if ($prompt->state === 'cancel') {
                         return $this->dim(match (true) {
                             $active && $selected => "› ◼ {$this->strikethrough($label)}  ",
-                            $active => "› ◻ {$this->strikethrough($label)}  ",
-                            $selected => "  ◼ {$this->strikethrough($label)}  ",
-                            default => "  ◻ {$this->strikethrough($label)}  ",
+                            $active              => "› ◻ {$this->strikethrough($label)}  ",
+                            $selected            => "  ◼ {$this->strikethrough($label)}  ",
+                            default              => "  ◻ {$this->strikethrough($label)}  ",
                         });
                     }
 
                     return match (true) {
                         $active && $selected => "{$this->cyan('› ◼')} {$label}  ",
-                        $active => "{$this->cyan('›')} ◻ {$label}  ",
-                        $selected => "  {$this->cyan('◼')} {$this->dim($label)}  ",
-                        default => "  {$this->dim('◻')} {$this->dim($label)}  ",
+                        $active              => "{$this->cyan('›')} ◻ {$label}  ",
+                        $selected            => "  {$this->cyan('◼')} {$this->dim($label)}  ",
+                        default              => "  {$this->dim('◻')} {$this->dim($label)}  ",
                     };
                 })
                 ->values(),

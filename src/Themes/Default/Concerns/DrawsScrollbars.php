@@ -25,7 +25,7 @@ trait DrawsScrollbars
             ->map(fn ($line) => $this->pad($line, $width))
             ->map(fn ($line, $index) => match ($index) {
                 $scrollPosition => preg_replace('/.$/', $this->{$color}('┃'), $line),
-                default => preg_replace('/.$/', $this->gray('│'), $line),
+                default         => preg_replace('/.$/', $this->gray('│'), $line),
             });
     }
 

@@ -2,7 +2,7 @@
 
 use function Laravel\Prompts\search;
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 $model = search(
     label: 'Which user should receive the email?',

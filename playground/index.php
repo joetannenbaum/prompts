@@ -14,7 +14,7 @@ use function Laravel\Prompts\suggest;
 use function Laravel\Prompts\text;
 use function Laravel\Prompts\warning;
 
-require __DIR__.'/../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 intro('Welcome to Laravel');
 
@@ -33,7 +33,7 @@ $name = suggest(
         'Tim MacDonald',
     ],
     validate: fn ($value) => match (true) {
-        ! $value => 'Please enter your name.',
+        !$value => 'Please enter your name.',
         default => null,
     },
 );
@@ -42,18 +42,18 @@ $path = text(
     label: 'Where should we create your project?',
     placeholder: 'E.g. ./laravel',
     validate: fn ($value) => match (true) {
-        ! $value => 'Please enter a path',
+        !$value           => 'Please enter a path',
         $value[0] !== '.' => 'Please enter a relative path',
-        default => null,
+        default           => null,
     },
 );
 
 $password = password(
     label: 'Provide a password',
     validate: fn ($value) => match (true) {
-        ! $value => 'Please enter a password.',
+        !$value            => 'Please enter a password.',
         strlen($value) < 5 => 'Password should have at least 5 characters.',
-        default => null,
+        default            => null,
     },
 );
 
@@ -70,8 +70,8 @@ $tools = multiselect(
     label: 'Select additional tools.',
     default: ['pint', 'eslint'],
     options: [
-        'pint' => 'Pint',
-        'eslint' => 'ESLint',
+        'pint'     => 'Pint',
+        'eslint'   => 'ESLint',
         'prettier' => 'Prettier',
     ],
     validate: function ($values) {

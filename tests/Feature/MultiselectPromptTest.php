@@ -32,9 +32,9 @@ it('accepts an array of keys and labels', function () {
     $result = multiselect(
         label: 'What are your favorite colors?',
         options: [
-            'red' => 'Red',
+            'red'   => 'Red',
             'green' => 'Green',
-            'blue' => 'Blue',
+            'blue'  => 'Blue',
         ]
     );
 
@@ -78,9 +78,9 @@ it('accepts default values when the options are keys with labels', function () {
     $result = multiselect(
         label: 'What are your favorite colors?',
         options: [
-            'red' => 'Red',
+            'red'   => 'Red',
             'green' => 'Green',
-            'blue' => 'Blue',
+            'blue'  => 'Blue',
         ],
         default: ['green']
     );
@@ -110,9 +110,9 @@ it('validates', function () {
     $result = multiselect(
         label: 'What are your favorite colors?',
         options: [
-            'red' => 'Red',
+            'red'   => 'Red',
             'green' => 'Green',
-            'blue' => 'Blue',
+            'blue'  => 'Blue',
         ],
         validate: fn ($values) => count($values) === 0 ? 'You must select at least one color.' : null
     );
@@ -146,9 +146,9 @@ it('support emacs style key binding', function () {
     $result = multiselect(
         label: 'What are your favorite colors?',
         options: [
-            'red' => 'Red',
+            'red'   => 'Red',
             'green' => 'Green',
-            'blue' => 'Blue',
+            'blue'  => 'Blue',
         ]
     );
 

@@ -35,10 +35,10 @@ class Progress extends Prompt
     public function __construct(public string $label, public iterable|int $steps, public string $hint = '')
     {
         $this->total = match (true) {
-            is_int($this->steps) => $this->steps,
+            is_int($this->steps)       => $this->steps,
             is_countable($this->steps) => count($this->steps),
-            is_iterable($this->steps) => iterator_count($this->steps),
-            default => throw new InvalidArgumentException('Unable to count steps.'),
+            is_iterable($this->steps)  => iterator_count($this->steps),
+            default                    => throw new InvalidArgumentException('Unable to count steps.'),
         };
 
         if ($this->total === 0) {

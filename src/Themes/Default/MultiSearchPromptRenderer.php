@@ -75,7 +75,7 @@ class MultiSearchPromptRenderer extends Renderer implements Scrolling
         return preg_replace(
             '/\s$/',
             $this->cyan('…'),
-            $this->pad($prompt->valueWithCursor($maxWidth - 1).'  ', min($this->longest($prompt->matches(), padding: 2), $maxWidth))
+            $this->pad($prompt->valueWithCursor($maxWidth - 1) . '  ', min($this->longest($prompt->matches(), padding: 2), $maxWidth))
         );
     }
 
@@ -106,7 +106,7 @@ class MultiSearchPromptRenderer extends Renderer implements Scrolling
     protected function renderOptions(MultiSearchPrompt $prompt): string
     {
         if ($prompt->searchValue() !== '' && empty($prompt->matches())) {
-            return $this->gray('  '.($prompt->state === 'searching' ? 'Searching...' : 'No results.'));
+            return $this->gray('  ' . ($prompt->state === 'searching' ? 'Searching...' : 'No results.'));
         }
 
         return $this->scrollbar(
@@ -121,9 +121,9 @@ class MultiSearchPromptRenderer extends Renderer implements Scrolling
 
                     return match (true) {
                         $active && $selected => "{$this->cyan('› ◼')} {$label}  ",
-                        $active => "{$this->cyan('›')} ◻ {$label}  ",
-                        $selected => "  {$this->cyan('◼')} {$this->dim($label)}  ",
-                        default => "  {$this->dim('◻')} {$this->dim($label)}  ",
+                        $active              => "{$this->cyan('›')} ◻ {$label}  ",
+                        $selected            => "  {$this->cyan('◼')} {$this->dim($label)}  ",
+                        default              => "  {$this->dim('◻')} {$this->dim($label)}  ",
                     };
                 }),
             $prompt->firstVisible,
@@ -153,7 +153,7 @@ class MultiSearchPromptRenderer extends Renderer implements Scrolling
      */
     protected function getInfoText(MultiSearchPrompt $prompt): string
     {
-        $info = count($prompt->value()).' selected';
+        $info = count($prompt->value()) . ' selected';
 
         $hiddenCount = count($prompt->value()) - collect($prompt->matches())
             ->filter(fn ($label, $key) => in_array(array_is_list($prompt->matches()) ? $label : $key, $prompt->value()))

@@ -37,9 +37,9 @@ trait TypedValue
                     Key::LEFT, Key::LEFT_ARROW, Key::CTRL_B => $this->cursorPosition = max(0, $this->cursorPosition - 1),
                     Key::RIGHT, Key::RIGHT_ARROW, Key::CTRL_F => $this->cursorPosition = min(mb_strlen($this->typedValue), $this->cursorPosition + 1),
                     Key::oneOf([Key::HOME, Key::CTRL_A], $key) => $this->cursorPosition = 0,
-                    Key::oneOf([Key::END, Key::CTRL_E], $key) => $this->cursorPosition = mb_strlen($this->typedValue),
-                    Key::DELETE => $this->typedValue = mb_substr($this->typedValue, 0, $this->cursorPosition).mb_substr($this->typedValue, $this->cursorPosition + 1),
-                    default => null,
+                    Key::oneOf([Key::END, Key::CTRL_E], $key)  => $this->cursorPosition = mb_strlen($this->typedValue),
+                    Key::DELETE                                => $this->typedValue = mb_substr($this->typedValue, 0, $this->cursorPosition) . mb_substr($this->typedValue, $this->cursorPosition + 1),
+                    default                                    => null,
                 };
 
                 return;
@@ -60,10 +60,10 @@ trait TypedValue
                         return;
                     }
 
-                    $this->typedValue = mb_substr($this->typedValue, 0, $this->cursorPosition - 1).mb_substr($this->typedValue, $this->cursorPosition);
+                    $this->typedValue = mb_substr($this->typedValue, 0, $this->cursorPosition - 1) . mb_substr($this->typedValue, $this->cursorPosition);
                     $this->cursorPosition--;
                 } elseif (ord($key) >= 32) {
-                    $this->typedValue = mb_substr($this->typedValue, 0, $this->cursorPosition).$key.mb_substr($this->typedValue, $this->cursorPosition);
+                    $this->typedValue = mb_substr($this->typedValue, 0, $this->cursorPosition) . $key . mb_substr($this->typedValue, $this->cursorPosition);
                     $this->cursorPosition++;
                 }
             }
@@ -100,10 +100,10 @@ trait TypedValue
             : [$after, false];
 
         return ($wasTruncatedBefore ? $this->dim('…') : '')
-            .$truncatedBefore
-            .$this->inverse($cursor)
-            .$truncatedAfter
-            .($wasTruncatedAfter ? $this->dim('…') : '');
+            . $truncatedBefore
+            . $this->inverse($cursor)
+            . $truncatedAfter
+            . ($wasTruncatedAfter ? $this->dim('…') : '');
     }
 
     /**

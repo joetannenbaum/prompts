@@ -14,9 +14,9 @@ it('accepts a callback', function () {
         label: 'What is your favorite color?',
         options: fn (string $value) => array_filter(
             [
-                'red' => 'Red',
+                'red'   => 'Red',
                 'green' => 'Green',
-                'blue' => 'Blue',
+                'blue'  => 'Blue',
             ],
             fn ($option) => str_contains(strtolower($option), strtolower($value)),
         ),
@@ -67,9 +67,9 @@ it('validates', function () {
     $result = search(
         label: 'What is your favorite color?',
         options: fn () => [
-            'red' => 'Red',
+            'red'   => 'Red',
             'green' => 'Green',
-            'blue' => 'Blue',
+            'blue'  => 'Blue',
         ],
         validate: fn ($value) => $value === 'red' ? 'Please choose green.' : null
     );
@@ -91,9 +91,9 @@ it('can fall back', function () {
     $result = search(
         label: 'What is your favorite color?',
         options: fn () => [
-            'red' => 'Red',
+            'red'   => 'Red',
             'green' => 'Green',
-            'blue' => 'Blue',
+            'blue'  => 'Blue',
         ],
     );
 
@@ -107,9 +107,9 @@ it('support emacs style key binding', function () {
         label: 'What is your favorite color?',
         options: fn (string $value) => array_filter(
             [
-                'red' => 'Red',
+                'red'   => 'Red',
                 'green' => 'Green',
-                'blue' => 'Blue',
+                'blue'  => 'Blue',
             ],
             fn ($option) => str_contains(strtolower($option), strtolower($value)),
         ),
